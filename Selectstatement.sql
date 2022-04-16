@@ -13,12 +13,17 @@ where timezone in('Asia/Kamchatka' , 'Asia/Vladivostok' );
 -- What planes have a flight range in the range from 3000 km to 6000 km
 
 select * from aircrafts
-where range between 3000 and 6000
+where range between 3000 and 6000;
 
 -- Get the model range and miles of every air craft exist in the airline database
 
 select model,range,round(range/1.609,2)
 as miles
-from aircrafts
+from aircrafts;
+
+-- return all info about aircraft based on aircraft code and its range in mile
+
+select model, round(range/1.609,2) as mile from aircrafts
+where aircraft_code = 'SU9'
 
 
