@@ -13,4 +13,11 @@ ORDER BY model;
 
 ---What is the shortest flight duration for each possible flight from Moscow to St. Petersburg, and how many times was the flight delayed for more than an hour?
 
-select * from tickets;
+SELECT f.flight_no, (f.Scheduled_arrival - f.Scheduled_departure) AS scheduled_duration,
+min(f.Scheduled_arrival - f.Scheduled_departure), max(f.Scheduled_arrival - f.Scheduled_departure),
+sum(CASE WHEN f.actual_departure > f.scheduled_departure + INTERVAL '1 hour'THEN 1 ELSE 0 END) delays
+FROM flights f
+WHERE (SELECT city ->> 'en' FROM airports WHERE airport_code = departure_airport) = 'Moscow'
+AND (SELECT city ->> 'en' FROM airports WHERE airport_code = arrival_airport) = 'St. Petersburg'
+AND f.status = 'Arrived'
+GROUP BY f.flight_no, (f.Scheduled_arrival - f.Scheduled_departure);
