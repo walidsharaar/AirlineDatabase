@@ -1,5 +1,12 @@
 --Count the number of routes laid from the airports?
-
+-- first we have create cities view
+CREATE VIEW cities AS SELECT (SELECT city ->> 'en' FROM airports 
+							  WHERE airport_code =departure_airport) 
+							  AS departure_city, 
+(SELECT city ->> 'en' FROM airports 
+ WHERE airport_code =arrival_airport) 
+AS arrival_city
+FROM flights
 
 --Suppose our airline marketers want to know how often there are different names among the passengers?
 
