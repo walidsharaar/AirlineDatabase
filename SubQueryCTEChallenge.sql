@@ -20,5 +20,9 @@ ORDER BY 1, 2;
 
 --Get a list of airports in cities with more than one airport ?
 
-
+SELECT aa.city ->> 'en'AS city, aa.airport_code, aa.airport_name ->> 'en' AS airport
+FROM (SELECT city, count (*)FROM airports GROUP BY city HAVING count (*)> 1) AS a
+JOIN airports AS aa
+ON a.city = aa.city
+ORDER BY aa.city, aa.airport_name;
 --What will be the total number of different routes that are theoretically can be laid between all cities?
