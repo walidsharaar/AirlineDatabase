@@ -1,6 +1,6 @@
 copy (select passenger_name, DATE_PART('day', book_date) as day, DATE_PART('month',book_date) as month,
-	  (select city from airports where airport_code = f.departure_airport)as departure_city,
-	  (select city from airports where airport_code = f.arrival_airport)as arrival_city,
+	  (select city->>'en' from airports where airport_code = f.departure_airport)as departure_city,
+	  (select city->>'en'  from airports where airport_code = f.arrival_airport)as arrival_city,
 	  sum(total_amount) as sales
 	  from bookings b
 	  join tickets t
