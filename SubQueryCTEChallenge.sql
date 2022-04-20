@@ -26,3 +26,7 @@ JOIN airports AS aa
 ON a.city = aa.city
 ORDER BY aa.city, aa.airport_name;
 --What will be the total number of different routes that are theoretically can be laid between all cities?
+SELECT count (*)
+FROM (SELECT DISTINCT city FROM airports) AS a1
+JOIN (SELECT DISTINCT city FROM airports) AS a2
+ON a1.city <> a2.city;
