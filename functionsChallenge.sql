@@ -18,5 +18,8 @@ ORDER BY count DESC;
 
 --Suppose our airline marketers want to know how often there are different names among the passengers?
 
-
+SELECT LEFT(passenger_name, STRPOS(passenger_name, ' ') - 1) AS firstname, COUNT (*)
+FROM tickets
+GROUP BY 1
+ORDER BY 2 DESC;
 --Which combinations of first names and last names separately occur most often? What is the ratio of the passengers with such names to the total number of passengers?
