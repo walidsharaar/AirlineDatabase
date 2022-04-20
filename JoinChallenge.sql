@@ -22,7 +22,17 @@ GROUP BY t.passenger_name, t.ticket_no
 HAVING max(bp.boarding_no) = 1 AND count(*) > 1;
 
 --Calculate the number of passengers and number of flights departing from one airport (SVO) during each hour on the indicated day 2017-08-02 ?
-
+SELECT date_part ('hour', f.scheduled_departure) "hour",count (ticket_no) passengers_cnt,
+count (DISTINCT f.flight_id) flights_cnt
+FROM flights f
+JOIN ticket_flights t ON f.flight_id = t.flight_id
+WHERE f.departure_airport = 'SVO'
+AND f.scheduled_departure >= '2017-08-02' :: date
+AND f.scheduled_departure <'2017-08-03' :: date
+GROUP BY date_part ('hour', f.scheduled_departure);
 
 
 --Use SQL  joins to  return unique city name, flight_no, airport and timezone?
+
+
+
