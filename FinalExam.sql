@@ -14,3 +14,5 @@ ON tf.flight_id = f.flight_id
 WHERE b.book_date = public.now()::date - INTERVAL '7 day'
 WINDOW w AS (PARTITION BY tf.ticket_no
 ORDER BY f.scheduled_departure);
+
+--2. Find the most disciplined passengers who checked in first for all their flights. Take into account only those passengers who took at least two flights?
