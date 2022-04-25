@@ -33,9 +33,21 @@ WHERE f.actual_departure IS NOT NULL
 ORDER BY f.actual_departure - f.scheduled_departure ;
 
 --4. How many seats remained free on flight PG0404 in the day before the last in the airlines database?
+SELECT count(*)
+FROM (SELECT s.seat_no FROM  seats s
+  WHERE s.aircraft_code = (SELECT aircraft_code
+  FROM  flights
+  WHERE flight_no = 'PG0404'
+  AND scheduled_departure::date = public.now()::date - INTERVAL '1 day')
+  EXCEPT
+  SELECT bp.seat_no
+  FROM boarding_passes bp
+  WHERE bp.flight_id = (SELECT flight_id
+  FROM  flights                                     
+  WHERE flight_no = 'PG0404'                                     
+  AND scheduled_departure::date = public.now()::date - INTERVAL '1 day')) t; 
 
 
---5. How many seats remained free on flight PG0404 in the day before the last in the airlines database?
 
 
---6. what is the different between the tables created using VIEWS and the tables created using SELECT INTO ?
+--5. what is the different between the tables created using VIEWS and the tables created using SELECT INTO ?
