@@ -23,3 +23,14 @@ JOIN boarding_passes bp
 ON bp.ticket_no = t.ticket_no
 GROUP BY t.passenger_name,t.ticket_no
 HAVING max(bp.boarding_no) = 1 AND count(*) > 1;
+
+-- 3. Which flights had the longest delays?
+
+
+--4. How many seats remained free on flight PG0404 in the day before the last in the airlines database?
+
+
+--5. How many seats remained free on flight PG0404 in the day before the last in the airlines database?
+
+
+--6. what is the different between the tables created using VIEWS and the tables created using SELECT INTO ?
